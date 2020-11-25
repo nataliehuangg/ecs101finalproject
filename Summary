@@ -7,15 +7,17 @@ The approach we decided to take first to solve the problem was to use a recursio
 We knew we had to have a base case and so we used an if statement setting the values of all scores when turns left equaled 0 to a certain amount. 
 Our recursive step was to use the else statement to call the same function but with score = score-1 or score +1 for dimes and for score = score-2 or score + 2 for quarters, 
 and to have that run through the function until it reached our base case. This part of the process did not work for us. 
-Due to our group’s lack of experience with Python, we decided to take what we had already figured out and put it into an excel file. 
-Here we implemented the algorithm in one section with dimes and the other section with quarters. 
-In each cell there is a case of score,turns left (column, row). 
+Due to our group’s lack of experience with Python, we decided to take what we had already figured out and put it into an excel file.
+
+We again knew we had to have a base case. Using our conclusions from before, at turn 0 we set all scores that are less than or equal to 0 equal to 0% (0) and all scores that are 
+greater than or equal to one equal to 100% (1).
 For dimes the algorithm 0.5*(s-1,t-1)+0.5(s+1,t-1) was implemented because with s, t you had a 50% chance of getting s-1,t -1 and a 50% chance of getting s+1, t-1.
+For quarters the same algorithm was implemented except with the score-2 and score +2, so it looked like this 0.5*(s-2,t-1)+0.5(s+2,t-1).
+If we set each cell equal to these algorithms, which we did at first, it would play a game of just dimes and just quarters, which is not what our game is.
+Instead, to play the game using dimes and quarters when it is valuable to use both, we used this algorithm: MAX(0.5*(s-1,t-1)+0.5(s+1,t-1), 0.5*(s-2,t-1)+0.5(s+2,t-1)) in each cell.
+This gave us the larger percentage of winning, but what we wanted was: should we flip a dime or quarter?
+We printed this out on a second sheet of our excel file using an if statement that printed a 0, indicating that you should flip a dime, and that the dime's percentage was larger
+or printed a 1, indicating that you should flip a quarter and that the quarter's percentage was larger. If the dime and quarter's percentages were equal, the statement printed a 0,
+because it did not matter if you flipped a dime or a quarter in that instance.
 
-(S-1,t-1) = the column to the left one, the row up one
-(s+1, t-1) = the column to the right one, the row up one
-
-For quarters, the same algorithm was used the same way, except for score -2 and +2 was used instead of 1, due to the way the points work in the game. 
-The max(% for dime, % for quarters) was used in sheet 2, which gave us insight on when we should flip a dime and when we should flip a quarter. 
-Some patterns that we recognized was that at score 0 and 1, every other turn there is a 50% chance of winning for flipping dimes and at score -1, 0, 1, and 2, 
-every other turn there is a 50% chance of winning for flipping quarters. 
+Some patterns that we recognized were that if you center the excel file at score = 0, there is a lot of symmetry to be found, in a pyramid shape. 
